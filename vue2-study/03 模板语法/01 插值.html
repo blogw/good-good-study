@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>插值</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+  <body style="background-color:lemonchiffon">
+    <div id="app">
+      {{message}}
+      <br />
+      <span v-once> v-once 指令,这个将不会改变: {{message}}</span>
+      <br />
+      {{inputHtml}}
+      <br />
+      <span v-html="inputHtml"></span>
+      <br />
+      <span v-bind:style="dynamicStyle">attribute</span>
+      <br />
+      <button v-bind:disabled="isButtonDisabled1">Button</button><button v-bind:disabled="isButtonDisabled2">Button</button>
+      <br />
+      {{ number + 1 }}<br />
+      {{ ok ? 'YES' : 'NO' }}<br />
+      {{ message.split('').reverse().join('') }}<br />
+      <input type="button" value="change" onclick="change();" />
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        message: "文本 插值",
+        inputHtml: "<span style='color:red'>red</span>",
+        dynamicStyle: "color:red",
+        isButtonDisabled1: true,
+        isButtonDisabled2: null,
+        number: 99,
+        ok: false
+      }
+    });
+
+    function change() {
+      vm.message = "changed !";
+    }
+  </script>
+</html>
