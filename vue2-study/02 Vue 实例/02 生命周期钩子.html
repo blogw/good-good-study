@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>生命周期钩子</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{a}}
+      <input type="button" value="change" onclick="change();" />
+    </div>
+  </body>
+  <script>
+    // 我们的数据对象
+    var data = { a: 1 };
+
+    // 该对象被加入到一个 Vue 实例中
+    var vm = new Vue({
+      el: "#app",
+      data: data,
+      beforeCreate: function() {
+        console.log("beforeCreated");
+      },
+      created: function() {
+        console.log("created");
+      },
+      beforeMount: function() {
+        console.log("beforeMount");
+      },
+      mounted: function() {
+        console.log("mounted");
+      },
+      beforeUpdate: function() {
+        console.log("beforeUpdate");
+      },
+      updated: function() {
+        console.log("updated");
+      }
+    });
+
+    function change() {
+      vm.a = vm.a + 1;
+    }
+  </script>
+</html>

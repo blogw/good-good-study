@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>数据与方法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{a}}
+      <br />
+      <input type="button" value="normalChange" onclick="normalChange();" />
+      <input type="button" value="vueChange1" onclick="vueChange1();" />
+      <input type="button" value="vueChange2" onclick="vueChange2();" />
+      <input type="button" value="vue el id" onclick="el();" />
+    </div>
+  </body>
+  <script>
+    // 我们的数据对象
+    var data = { a: 1 };
+
+    // 该对象被加入到一个 Vue 实例中
+    var vm = new Vue({
+      el: "#app",
+      data: data
+    });
+
+    // $watch 是一个实例方法
+    vm.$watch("a", function(newValue, oldValue) {
+      console.log(`newValue=${newValue},oldValue=${oldValue}`);
+    });
+
+    function normalChange() {
+      data.a = "normal changed!";
+    }
+    function vueChange1() {
+      vm.a = "vue1 changed!";
+    }
+    function vueChange2() {
+      vm.$data.a = "vue2 changed!";
+    }
+    function el() {
+      console.log(vm.$el === document.getElementById("app"));
+      alert(vm.$el.innerHTML);
+    }
+  </script>
+</html>
