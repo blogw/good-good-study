@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>VIDEO-EXAMPLE sample02</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="product in products">
+          {{product}}
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        products: ["Books", "Phones", "Shoes"]
+      }
+    });
+  </script>
+</html>

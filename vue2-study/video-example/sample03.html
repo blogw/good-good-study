@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>VIDEO-EXAMPLE sample03</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="product in products">
+          <input type="number" v-model.number="product.stock" />
+          {{product.stock}} {{product.name}}
+          <span v-if="product.stock===0" style="color:red;">
+            - OUT OF STOCK
+          </span>
+          <button @click="product.stock+=1">add</button>
+        </li>
+      </ul>
+      <h2>Total: {{total}}</h2>
+    </div>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        products: []
+      },
+      computed: {
+        total() {
+          //注意es6 reduce求和的用法
+          return this.products.reduce((sum, product) => {
+            return sum + product.stock;
+          }, 0);
+        }
+      },
+      created() {
+        fetch("https://blogw.github.io/demo/data/products.json")
+          .then(response => response.json())
+          .then(json => {
+            this.products = json.products;
+          });
+      }
+    });
+  </script>
+</html>
