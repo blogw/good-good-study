@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>绑定 HTML Class</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+  <body style="background-color:lemonchiffon">
+    <div id="app">
+      <div id="targetDiv" class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }"></div>
+      <div class="static" v-bind:class="classObject"></div>
+      <div class="static" v-bind:class="classComputedObject"></div>
+      <div v-bind:class="[activeClass, errorClass]"></div>
+      <my-component class="baz boo"></my-component>
+    </div>
+  </body>
+  <script>
+    Vue.component("my-component", {
+      template: '<p class="foo bar">Hi</p>'
+    });
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        isActive: true,
+        hasError: false,
+        error: null,
+        classObject: {
+          active: true,
+          "text-danger": false
+        },
+        activeClass: "active",
+        errorClass: "text-danger"
+      },
+      computed: {
+        classComputedObject: function() {
+          return {
+            active: this.isActive && !this.error,
+            "text-danger": this.error && this.error.type === "fatal"
+          };
+        }
+      }
+    });
+  </script>
+</html>
