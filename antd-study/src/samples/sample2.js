@@ -8,6 +8,8 @@ import enUS from "antd/es/locale/en_US";
 import moment from "moment";
 import "moment/locale/zh-cn";
 import "moment/locale/ja";
+import { Select } from "antd";
+const { Option } = Select;
 
 class Sample2 extends React.Component {
   constructor(props) {
@@ -21,7 +23,11 @@ class Sample2 extends React.Component {
       },
     };
   }
-  componentDidMount() {
+  componentDidMount = () => {
+    this.changeMomentLocale();
+  };
+
+  changeMomentLocale = () => {
     switch (this.state.current_locale) {
       case "zh":
         moment.locale("zh-cn");
@@ -32,10 +38,23 @@ class Sample2 extends React.Component {
       default:
         return;
     }
-  }
-  render() {
+  };
+
+  handleChange = (value) => {
+    this.setState({
+      current_locale: value,
+    });
+  };
+
+  render = () => {
     return (
       <ConfigProvider locale={this.state.locale_map[this.state.current_locale]}>
+        <Select defaultValue="zh" style={{ width: 120 }} onChange={this.handleChange}>
+          <Option value="zh">zh</Option>
+          <Option value="ja">ja</Option>
+          <Option value="en">en</Option>
+        </Select>
+
         <div className="Sample2">
           <h1>antd version: {version}</h1>
           <DatePicker />
@@ -45,6 +64,6 @@ class Sample2 extends React.Component {
         </div>
       </ConfigProvider>
     );
-  }
+  };
 }
 export default Sample2;
