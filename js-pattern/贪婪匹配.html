@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>贪婪匹配</title>
+  </head>
+  <body>
+    <h3>贪婪匹配</h2>
+    <pre>
+    默认是贪婪匹配就是尽可能多的匹配
+    非贪婪匹配就是尽可能少的匹配，用法就是在量词后面加上一个“？”
+
+    返回数组：
+      0.整个匹配 1:group匹配
+    </pre>
+
+    <h3>全局匹配</h2>
+      <pre>
+      查找所有匹配而非在找到第一个匹配后停止
+  
+      返回数组：
+        0.整个匹配 1:group匹配
+      </pre>
+  </body>
+  <script>
+    console.log("===贪婪匹配===")
+    var regex1 = /(hello)+/;
+    var regex2 = /(hello)+?/;
+    console.log("123hellohello789".match(regex1));
+
+    var result = "123hellohello789".match(regex2);
+    console.log(result[0]);
+    console.log(result[1]);
+    console.log(result.index);
+    console.log(result.input);
+    console.log("")
+
+    console.log("===全局匹配===");
+    var regex1 = /(hello)/g;
+    var regex2 = /(hello)/;
+    console.log("123hello456hello789".match(regex1));
+    console.log("123hello456hello789".match(regex2));
+    console.log("")
+
+    console.log("===替换掉开头===");
+    var regex = /^[^0-9|^-]+/g;
+    console.log("abc-124.55def".replace(regex,''));
+    console.log("")
+  </script>
+</html>
